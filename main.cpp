@@ -67,15 +67,15 @@ inline void swap(int indexA, int indexB, int sortableArray[]){
 }
 
 inline bool bubbleSort(int sortableArray[], int finalIndex){
-    int counter = 0;
+    bool sorted = true;
     
     for (int i=0; i<=finalIndex; ++i){
         if (sortableArray[i]>sortableArray[i+1]) {
             swap(i, i+1, sortableArray);
-            ++counter;
+            sorted = false;
         }
     }
     //cout << counter << endl;
     
-    return counter == 0;
+    return sorted;
 }
