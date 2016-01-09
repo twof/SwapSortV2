@@ -35,21 +35,21 @@ int main(int argc, const char * argv[]) {
         swapSort(sortableArray, startSortIndex, finalSortIndex);
         //cout << count++ << endl;
     } while (!bubbleSort(sortableArray, finalSortIndex, startSortIndex));
-    /*for (int i=0; i<SIZE;i++) {  //uncomment this for loop to print the sorted array. Commented out to test for time
+    for (int i=0; i<SIZE;i++) {  //uncomment this for loop to print the sorted array. Commented out to test for time
         cout << i << ": " << sortableArray[i] << endl;
-    }*/
+    }
     return 0; //end
 }
 
 inline void arrayFiller(int sortableArray[]){
     for (int i=0; i<SIZE; ++i){
-        sortableArray[i] = rand()%1000; //fill the array with numbers between 1 and 10000000
+        sortableArray[i] = rand()%1000000; //fill the array with numbers between 1 and 10000000
     }
 }
 
 inline void swapSort(int sortableArray[], int frontSkip, int backSkip){
     
-    for (int split = 1; split <= SIZE; split*=2) {
+    for (int split = 1; split <= SIZE/900000; split*=2) {
         
         for (int i = 0; i < split; ++i) {
             int startIndex = (i*(SIZE/split))+frontSkip;
