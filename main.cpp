@@ -12,23 +12,29 @@
 using namespace std;
 
 inline void arrayFiller(int sortableArray[]);
-inline void swapSort(int sortableArray[]);
+inline void swapSort(int sortableArray[], int frontSkip, int backSkip);
 inline void swap(int indexA, int indexB, int sortableArray[]);
-inline bool bubbleSort(int sortableArray[], int finalIndex);
+inline bool bubbleSort(int sortableArray[], int finalIndex, int startIndex);
 
 const int SIZE = 1000000; //size of the array being sorted. Change this to change the size.
 
 int main(int argc, const char * argv[]) {
     int sortableArray[SIZE]; //array to be sorted
-    int count = 0;
     srand(time(0)); //seed rand for filling the array
     arrayFiller(sortableArray); //fill the array
-    int finalBubbleSortIndex = SIZE;
+    
+    /*for (int i=0; i<SIZE;i++) {  //uncomment this for loop to print the sorted array. Commented out to test for time
+        cout << i << ": " << sortableArray[i] << endl;
+    }*/
+    
+    int finalSortIndex = SIZE;
+    int startSortIndex = -1;
     do {
-        swapSort(sortableArray);
-        finalBubbleSortIndex--;
+        --finalSortIndex;
+        ++startSortIndex;
+        swapSort(sortableArray, startSortIndex, finalSortIndex);
         //cout << count++ << endl;
-    } while (!bubbleSort(sortableArray, finalBubbleSortIndex));
+    } while (!bubbleSort(sortableArray, finalSortIndex, startSortIndex));
     /*for (int i=0; i<SIZE;i++) {  //uncomment this for loop to print the sorted array. Commented out to test for time
         cout << i << ": " << sortableArray[i] << endl;
     }*/
@@ -37,16 +43,16 @@ int main(int argc, const char * argv[]) {
 
 inline void arrayFiller(int sortableArray[]){
     for (int i=0; i<SIZE; ++i){
-        sortableArray[i] = rand()%100000; //fill the array with numbers between 1 and 10000000
+        sortableArray[i] = rand()%1000; //fill the array with numbers between 1 and 10000000
     }
 }
 
-inline void swapSort(int sortableArray[]){
+inline void swapSort(int sortableArray[], int frontSkip, int backSkip){
     
-    for (int split = 1; split <= SIZE/16; split*=2) {
+    for (int split = 1; split <= SIZE; split*=2) {
         
         for (int i = 0; i < split; ++i) {
-            int startIndex = i*(SIZE/split);
+            int startIndex = (i*(SIZE/split))+frontSkip;
             int endIndex = (startIndex+(SIZE/(split*2)))-1;
             
             for (int j = 0; j <= endIndex-startIndex; ++j) {
@@ -63,16 +69,24 @@ inline void swapSort(int sortableArray[]){
 inline void swap(int indexA, int indexB, int sortableArray[]){
     int temp = sortableArray[indexA];
     sortableArray[indexA] = sortableArray[indexB];
-    sortableArray[indexB]=temp;
+    sortableArray[indexB] = temp;
 }
 
-inline bool bubbleSort(int sortableArray[], int finalIndex){
+inline bool bubbleSort(int sortableArray[], int finalIndex, int startIndex){
     bool sorted = true;
     
-    for (int i=0; i<=finalIndex; ++i){
+    for (int i=startIndex; i<finalIndex; ++i){
         if (sortableArray[i]>sortableArray[i+1]) {
             swap(i, i+1, sortableArray);
             sorted = false;
+        }
+    }
+    if (!sorted){
+        for (int i = finalIndex; i > startIndex; --i) {
+            if (sortableArray[i]<sortableArray[i-1]) {
+                swap(i, i-1, sortableArray);
+                sorted = false;
+            }
         }
     }
     //cout << counter << endl;
