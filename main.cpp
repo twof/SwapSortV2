@@ -17,25 +17,25 @@ inline void swapSort(int sortableArray[], int skipNum);
 inline void swap(int indexA, int indexB, int sortableArray[]);
 inline bool bubbleSort(int sortableArray[], int startIndex);
 
-const int SIZE = 10; //size of the array being sorted. Change this to change the size.
+const int SIZE = 1000000; //size of the array being sorted. Change this to change the size.
 
 int main(int argc, const char * argv[]) {
     int sortableArray[SIZE]; //array to be sorted
     srand(time(0)); //seed rand for filling the array
     arrayFiller(sortableArray); //fill the array
     
-    for (int i=0; i<SIZE;i++) {  //uncomment this for loop to print the sorted array. Commented out to test for time
+    /*for (int i=0; i<SIZE;i++) {  //uncomment this for loop to print the sorted array. Commented out to test for time
         cout << i << ": " << sortableArray[i] << endl;
-    }
+    }*/
     
     int startSortIndex = -1;
     do {
         swapSort(sortableArray, ++startSortIndex);
         //cout << count++ << endl;
     } while (!bubbleSort(sortableArray, startSortIndex));
-    for (int i=0; i<SIZE;i++) {  //uncomment this for loop to print the sorted array. Commented out to test for time
+    /*for (int i=0; i<SIZE;i++) {  //uncomment this for loop to print the sorted array. Commented out to test for time
         cout << i << ": " << sortableArray[i] << endl;
-    }
+    }*/
     return 0; //end
 }
 
@@ -50,11 +50,11 @@ inline void arrayFiller(int sortableArray[]){
  2. Check everything from the outside in. Swap when necisary.
  3. Continue splitting and swapping until the number of splits is greater than the size of the array
  
- Current problem:
- Every time we take a pass with bubblesort, the first and last elements are guaranteed to be in place
- We need to leave the first and last elements out of the split calculations. 
- So how do we do this mathmatically?
- Maybe we could precompute the split locations with each pass, but that includes the creation of an array which is obnoxious. Maybe though. 
+ Last Solution:
+ Used adjusted size rather than actual size. This prevents overlapping.
+ 
+ Current Problem:
+ 
  
 */
 
