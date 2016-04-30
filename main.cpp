@@ -60,21 +60,11 @@ inline void arrayFiller(int sortableArray[]){
 
 inline void swapSort(int sortableArray[], int skipNum){
     const int ADJUSTED_SIZE = SIZE - (skipNum*2);
-            /*int endIndex = (skipNum+(SIZE/2))-1;
-            
-            for (int j = 0; j <= endIndex-skipNum; ++j) {
-                int currentIndex = j+skipNum;
-                
-                int indexToCheck = (-1-j)+(SIZE);
-                
-                if (sortableArray[currentIndex] > sortableArray[indexToCheck]) swap(currentIndex, indexToCheck, sortableArray);
-            }*/
+    
     for (int split = 1; split <= ADJUSTED_SIZE/2; split*=2) {
         for (int i = 0; i < split; ++i) {
             int startIndex = skipNum+(i*(ADJUSTED_SIZE/split));
             int endIndex = (startIndex+(ADJUSTED_SIZE/(split*2)))-1;
-            //this doesn't work. Commented out for posterity
-            //int endIndex = startIndex+((SIZE/(split*2))-1-skipNum);
             
             for (int j = 0; j <= endIndex-startIndex; ++j) {
                 int currentIndex = j+startIndex;
