@@ -12,4 +12,4 @@ Low priority:
 *See if there's any way the algorithem could be further optimized for caching
 
 
-I have a WIP Medium blog post on the development of this project that can be found here: https://medium.com/@twof/e1096d93d478
+I have a Medium blog post on the development of this project that can be found here: https://medium.com/@twof/on-the-optimization-of-bubble-sort-e1096d93d478#.ieqe9gnu8
