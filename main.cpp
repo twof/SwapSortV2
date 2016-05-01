@@ -61,7 +61,7 @@ inline void arrayFiller(int sortableArray[]){
 inline void swapSort(int sortableArray[], int skipNum){
     const int ADJUSTED_SIZE = SIZE - (skipNum*2);
     
-    for (int split = 1; split <= ADJUSTED_SIZE/2; split*=2) {
+    for (int split = 1; split <= ADJUSTED_SIZE/16; split*=2) { //16 is a magic number right now. Need to figure out how to optimally compute the number that should go there
         for (int i = 0; i < split; ++i) {
             int startIndex = skipNum+(i*(ADJUSTED_SIZE/split));
             int endIndex = (startIndex+(ADJUSTED_SIZE/(split*2)))-1;
